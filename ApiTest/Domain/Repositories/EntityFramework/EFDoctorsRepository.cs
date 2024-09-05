@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace ApiTest.Domain.Repositories.EntityFramework
 {
-    public class EFDoctorsRepository:IDoctorsRepository
+    public class EFDoctorsRepository : IDoctorsRepository
     {
         private readonly HospitalDbContext _context;
         public EFDoctorsRepository(HospitalDbContext context)
@@ -49,7 +49,7 @@ namespace ApiTest.Domain.Repositories.EntityFramework
         public async Task<List<Doctor>> GetDoctorsAsync(string? sortItem, string? sortOrder, PaginationModel pagination)
         {
             var doctorsQueri = _context.Doctors.Include(d => d.Cabinet)
-                                                .Include(d=>d.Specialization)
+                                                .Include(d => d.Specialization)
                                                 .Include(d => d.Department);
             Expression<Func<Doctor, object>> selectorKey = sortItem?.ToLower() switch
             {
@@ -58,7 +58,6 @@ namespace ApiTest.Domain.Repositories.EntityFramework
                 "spec" => doc => doc.Specialization.Name,
                 "department" => doc => doc.Department.Number,
                 _ => doc => doc.Id
-
             };
 
             if (sortOrder == "desc")

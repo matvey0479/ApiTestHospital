@@ -12,15 +12,15 @@ namespace ApiTest.Controllers
     {
         private readonly IPatientsRepository _patientsRepository;
 
-        public PatientsController (IPatientsRepository patientsRepository)
+        public PatientsController(IPatientsRepository patientsRepository)
         {
             _patientsRepository = patientsRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<PatientsResponse>>> GetPatients(string? sortItem,string? sortOrder,[FromQuery]PaginationModel? pagination)
+        public async Task<ActionResult<List<PatientsResponse>>> GetPatients(string? sortItem, string? sortOrder, [FromQuery] PaginationModel? pagination)
         {
-            var patients = await _patientsRepository.GetPatientsAsync(sortItem,sortOrder,pagination);
+            var patients = await _patientsRepository.GetPatientsAsync(sortItem, sortOrder, pagination);
             var response = patients.Select(p => new PatientsResponse(p.Id, p.LastName, p.FirstName, p.Patronymic, p.Adress, p.BirthDate, p.Gender, p.Department));
             return Ok(response);
         }
@@ -33,7 +33,7 @@ namespace ApiTest.Controllers
         [HttpPost]
         public async Task<ActionResult<Guid>> CreatePatient([FromBody] PatientsRequest request)
         {
-            var patientId = await _patientsRepository.AddPatientAsync(new Patient(request.LastName,request.FirstName,request.Patronymic,request.Adress,request.BirthDate,request.Gender,request.DepartmentId));
+            var patientId = await _patientsRepository.AddPatientAsync(new Patient(request.LastName, request.FirstName, request.Patronymic, request.Adress, request.BirthDate, request.Gender, request.DepartmentId));
             return Ok(patientId);
         }
 

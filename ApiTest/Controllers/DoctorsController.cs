@@ -21,7 +21,7 @@ namespace ApiTest.Controllers
         public async Task<ActionResult<List<DoctorsResponse>>> GetDoctors(string? sortItem, string? sortOrder, [FromQuery] PaginationModel? pagination)
         {
             var Doctors = await _doctorsRepository.GetDoctorsAsync(sortItem, sortOrder, pagination);
-            var response = Doctors.Select(d => new DoctorsResponse(d.Id, d.Fio,d.Cabinet.Number, d.Specialization.Name, d.Department.Number));
+            var response = Doctors.Select(d => new DoctorsResponse(d.Id, d.Fio, d.Cabinet.Number, d.Specialization.Name, d.Department.Number));
             return Ok(response);
         }
         [HttpGet("{id:guid}")]

@@ -1,7 +1,5 @@
 ﻿using ApiTest.Domain.Entites;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ApiTest.Domain
 {
@@ -33,9 +31,5 @@ namespace ApiTest.Domain
             modelbuilder.Entity<Cabinet>().HasData(new Cabinet { Id = new Guid("16e11064-6191-4071-be7d-75df802fad63"), Number = 4 });
 
         }
-
-
-
-
     }
 }
